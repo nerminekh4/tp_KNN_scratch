@@ -19,3 +19,8 @@ class KNN:
         if self.X_train is None:
             return f"KNN classifier (k={self.k}, not fitted yet)"
         return f"KNN classifier (k={self.k}, trained on {len(self.X_train)} samples)"
+    
+    def fit(self, X_train, Y_train):
+        self.X_train = [list(row) for row in X_train]
+        self.Y_train = list(Y_train)
+        return self
