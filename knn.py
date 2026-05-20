@@ -20,6 +20,18 @@ class KNN:
             return f"KNN classifier (k={self.k}, not fitted yet)"
         return f"KNN classifier (k={self.k}, trained on {len(self.X_train)} samples)"
     
+    @staticmethod
+    def _euclidean_distance(point_a, point_b):
+        """
+        Compute the Euclidean distance between two equal-length vectors.
+
+        d(a, b) = sqrt( sum_i (a_i - b_i)^2 )
+        """
+        squared_sum = 0.0
+        for a, b in zip(point_a, point_b):
+            squared_sum += (a - b) ** 2
+        return squared_sum ** 0.5
+    
     def fit(self, X_train, Y_train):
         self.X_train = [list(row) for row in X_train]
         self.Y_train = list(Y_train)
