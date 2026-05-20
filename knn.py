@@ -39,8 +39,6 @@ class KNN:
         return squared_sum ** 0.5
     
     def fit(self, X_train, Y_train):
-        self.X_train = [list(row) for row in X_train]
-        self.Y_train = list(Y_train)
         if len(X_train) != len(Y_train):
             raise ValueError(
                 f"X_train and Y_train must have the same length "
@@ -50,6 +48,8 @@ class KNN:
             raise ValueError(
                 f"Cannot fit with fewer samples ({len(X_train)}) than k ({self.k})"
             )
+        self.X_train = [list(row) for row in X_train]
+        self.Y_train = list(Y_train)
         return self
     
     def _predict_one(self, x):
