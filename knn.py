@@ -7,6 +7,7 @@ class KNN:
     Y_train : list | None
         Training labels. None until `fit` is called
     """
+    VERSION = "1.0.0"
     def __init__(self, k=5):
         self.k = k
         self.X_train = None
