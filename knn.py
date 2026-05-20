@@ -125,3 +125,16 @@ class KNN:
             "best_score": best_score,
             "all_scores": all_scores,
         }
+    
+    def __eq__(self, other):
+        if not isinstance(other, KNN):
+            return NotImplemented
+        return self.k == other.k
+
+    def __lt__(self, other):
+        if not isinstance(other, KNN):
+            return NotImplemented
+        return self.k < other.k
+
+    def __hash__(self):
+        return hash(("KNN", self.k))
