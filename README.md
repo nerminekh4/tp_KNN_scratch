@@ -19,8 +19,13 @@ K-Nearest Neighbors, dans le cadre du premier FOAD.
 | `knn.py`           | Classe `KNN` (fit / predict / evaluate / grid)     |
 | `utils.py`         | `train_test_split` from scratch                    |
 | `main.py`          | Pipeline complet (load → split → train → evaluate) |
-| `bienetre.csv`     | Jeu de données                                     |
 | `requirements.txt` | Dépendances de `data_loader.py`                    |
+
+## Données
+
+Le dataset `bienetre.csv` n'est **pas versionné** (le `.gitignore` l'exclut).
+Place-le à la racine du projet avant de lancer `main.py`. Il est fourni
+par l'enseignant.
 
 ## Lancer le projet
 
