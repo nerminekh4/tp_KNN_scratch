@@ -79,3 +79,18 @@ class KNN:
             raise ValueError("predictions and Y_test must have the same length")
         correct = sum(1 for p, y in zip(predictions, Y_test_list) if p == y)
         return correct / len(Y_test_list)
+    
+    def confusion_matrix(self, X_test, Y_test):
+        predictions = self.predict(X_test)
+        Y_test_list = list(Y_test)
+        tp = tn = fp = fn = 0
+        for p, y in zip(predictions, Y_test_list):
+            if p == 1 and y == 1:
+                tp += 1
+            elif p == 0 and y == 0:
+                tn += 1
+            elif p == 1 and y == 0:
+                fp += 1
+            else:  # p == 0 and y == 1
+                fn += 1
+        return {"TP": tp, "TN": tn, "FP": fp, "FN": fn}
