@@ -45,3 +45,24 @@ class KNN:
                 f"Cannot fit with fewer samples ({len(X_train)}) than k ({self.k})"
             )
         return self
+    
+    def _predict_one(self, x):
+        distances = []
+        for i, x_train in enumerate(self.X_train):
+            d = self._euclidean_distance(x, x_train)
+            distances.append((d, self.Y_train[i]))
+
+        distances.sort(key=lambda pair: pair[0])
+        k_nearest_labels = [label for _, label in distances[:self.k]]
+
+        votes = {}
+        for label in k_nearest_labels:
+            votes[label] = votes.get(label, 0) + 1
+
+        best_label = None
+        best_count = -1
+        for label, count in votes.items():
+            if count > best_count:
+                best_label = label
+                best_count = count
+        return best_label
