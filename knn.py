@@ -89,17 +89,11 @@ class KNN:
     def confusion_matrix(self, X_test, Y_test):
         predictions = self.predict(X_test)
         Y_test_list = list(Y_test)
-        tp = tn = fp = fn = 0
+        labels = sorted(set(Y_test_list) | set(predictions))
+        matrix = {true: {pred: 0 for pred in labels} for true in labels}
         for p, y in zip(predictions, Y_test_list):
-            if p == 1 and y == 1:
-                tp += 1
-            elif p == 0 and y == 0:
-                tn += 1
-            elif p == 1 and y == 0:
-                fp += 1
-            else:  # p == 0 and y == 1
-                fn += 1
-        return {"TP": tp, "TN": tn, "FP": fp, "FN": fn}
+            matrix[y][p] += 1
+        return matrix
     
     @classmethod
     def grid_search(cls, X_train, Y_train, X_val, Y_val, k_values):
