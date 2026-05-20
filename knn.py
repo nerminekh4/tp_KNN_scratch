@@ -94,3 +94,28 @@ class KNN:
             else:  # p == 0 and y == 1
                 fn += 1
         return {"TP": tp, "TN": tn, "FP": fp, "FN": fn}
+    
+    @classmethod
+    def grid_search(cls, X_train, Y_train, X_val, Y_val, k_values):
+        all_scores = {}
+        best_k = None
+        best_score = -1.0
+
+        for k in k_values:
+            model = cls(k=k)
+            model.fit(X_train, Y_train)
+            score = model.evaluate(X_val, Y_val)
+            all_scores[k] = score
+            print(f"  k={k:>3} -> accuracy={score:.4f}")
+            if score > best_score:
+                best_score = score
+                best_k = k
+
+        best_model = cls(k=best_k)
+        best_model.fit(X_train, Y_train)
+        return {
+            "best_model": best_model,
+            "best_k": best_k,
+            "best_score": best_score,
+            "all_scores": all_scores,
+        }
