@@ -66,3 +66,8 @@ class KNN:
                 best_label = label
                 best_count = count
         return best_label
+    
+    def predict(self, X_test):
+        if self.X_train is None:
+            raise RuntimeError("Model is not fitted yet. Call fit() first.")
+        return [self._predict_one(list(x)) for x in X_test]
