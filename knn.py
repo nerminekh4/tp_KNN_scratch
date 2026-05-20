@@ -23,4 +23,13 @@ class KNN:
     def fit(self, X_train, Y_train):
         self.X_train = [list(row) for row in X_train]
         self.Y_train = list(Y_train)
+        if len(X_train) != len(Y_train):
+            raise ValueError(
+                f"X_train and Y_train must have the same length "
+                f"(got {len(X_train)} and {len(Y_train)})"
+            )
+        if len(X_train) < self.k:
+            raise ValueError(
+                f"Cannot fit with fewer samples ({len(X_train)}) than k ({self.k})"
+            )
         return self
