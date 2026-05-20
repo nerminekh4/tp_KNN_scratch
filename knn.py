@@ -14,3 +14,8 @@ class KNN:
 
     def __repr__(self):
         return f"KNN(k={self.k})"
+    
+    def __str__(self):
+        if self.X_train is None:
+            return f"KNN classifier (k={self.k}, not fitted yet)"
+        return f"KNN classifier (k={self.k}, trained on {len(self.X_train)} samples)"
