@@ -71,3 +71,11 @@ class KNN:
         if self.X_train is None:
             raise RuntimeError("Model is not fitted yet. Call fit() first.")
         return [self._predict_one(list(x)) for x in X_test]
+    
+    def evaluate(self, X_test, Y_test):
+        predictions = self.predict(X_test)
+        Y_test_list = list(Y_test)
+        if len(predictions) != len(Y_test_list):
+            raise ValueError("predictions and Y_test must have the same length")
+        correct = sum(1 for p, y in zip(predictions, Y_test_list) if p == y)
+        return correct / len(Y_test_list)
