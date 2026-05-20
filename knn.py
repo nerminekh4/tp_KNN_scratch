@@ -21,6 +21,11 @@ class KNN:
             return f"KNN classifier (k={self.k}, not fitted yet)"
         return f"KNN classifier (k={self.k}, trained on {len(self.X_train)} samples)"
     
+    def __len__(self):
+        if self.X_train is None:
+            return 0
+        return len(self.X_train)
+    
     @staticmethod
     def _euclidean_distance(point_a, point_b):
         """
