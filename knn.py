@@ -8,18 +8,18 @@ class KNN:
         Training labels. None until `fit` is called
     """
     VERSION = "1.0.0"
-    def __init__(self, k=5):
-        self.k = k
+    def __init__(self, n_neighbors=5):
+        self.n_neighbors = n_neighbors
         self.X_train = None
         self.Y_train = None
 
     def __repr__(self):
-        return f"KNN(k={self.k})"
+        return f"KNN(n_neighbors={self.n_neighbors})"
     
     def __str__(self):
         if self.X_train is None:
-            return f"KNN classifier (k={self.k}, not fitted yet)"
-        return f"KNN classifier (k={self.k}, trained on {len(self.X_train)} samples)"
+            return f"KNN classifier (n_neighbors={self.n_neighbors}, not fitted yet)"
+        return f"KNN classifier (n_neighbors={self.n_neighbors}, trained on {len(self.X_train)} samples)"
     
     def __len__(self):
         if self.X_train is None:
@@ -44,9 +44,9 @@ class KNN:
                 f"X_train and Y_train must have the same length "
                 f"(got {len(X_train)} and {len(Y_train)})"
             )
-        if len(X_train) < self.k:
+        if len(X_train) < self.n_neighbors:
             raise ValueError(
-                f"Cannot fit with fewer samples ({len(X_train)}) than k ({self.k})"
+                f"Cannot fit with fewer samples ({len(X_train)}) than n_neighbors ({self.n_neighbors})"
             )
         self.X_train = [list(row) for row in X_train]
         self.Y_train = list(Y_train)
